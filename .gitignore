@@ -1,0 +1,5 @@
+*.out
+*.swp
+*.class
+*.dll
+*.so
