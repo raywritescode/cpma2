@@ -19,7 +19,7 @@
 
 int main(void)
 {
-    float volume, sphere, radius = 10.0f;
+    float volume, radius = 10.0f;
 
     volume = (4.0f/3.0f) * PI * (radius * radius * radius);
 
