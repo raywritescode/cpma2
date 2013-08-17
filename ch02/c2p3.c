@@ -17,7 +17,7 @@
 
 int main(void)
 {
-    float volume, sphere, radius;
+    float volume, radius;
 
     printf("Enter a radius value: ");
     scanf("%f", &radius);
