@@ -1,5 +1,8 @@
+# ignore these C-related files.
 *.out
+
+# ignore these vi-related files.
 *.swp
-*.class
-*.dll
-*.so
+
+# ignore this directory. Used for example programs from book chapters.
+examples
