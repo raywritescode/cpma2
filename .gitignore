@@ -3,6 +3,7 @@
 
 # ignore these vi-related files.
 *.swp
+*.swo
 
 # ignore this directory. Used for example programs from book chapters.
 examples
