@@ -22,12 +22,12 @@ int main(void)
     printf("Enter number of entries in table: ");
     scanf("%d", &n);
  
-    //    i = 1;
+    // i = 1;    /* original line from square3.c */
     odd = 3;
 
-    for (i = 1, square = 1; i <= n; odd += 2, ++i) {
+    for (i = 1, square = 1; i <= n; odd += 2, ++i) {  /* added i = 1 and ++1 */
         printf("%10d%10d\n", i, square);
-        // ++i;
+        // ++i;    /* original line from square3.c */
         square += odd;
     }
 
