@@ -41,7 +41,7 @@ int main(void)
     scanf("%d", &start_day);
     printf("\n");
 
-    / * prints the blank days of the first week */
+    /* prints the blank days of the first week */
     for (i = 1; i < start_day; i++) {
         printf("   ");
     }
