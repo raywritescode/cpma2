@@ -23,12 +23,12 @@
 
 #include <stdio.h>
 
-#define LAST_WORD 1
+#define LAST_WORD 1    /* the last word is not counted in the switch */
 
 int main(void)
 {
     char input;
-    int words = 0, characters = 0;
+    int characters = 0, words = LAST_WORD;
 
     printf("\nEnter a sentence: ");
 
@@ -42,8 +42,6 @@ int main(void)
                 break;
         }
     }
-
-    words += LAST_WORD;
 
     printf("Characters = %d\n", characters);
     printf("Words = %d\n", words);
