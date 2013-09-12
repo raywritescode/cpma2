@@ -10,7 +10,7 @@
    then displays the time in 24-hour form:
 
        Enter a 12-hour time: 9:11 PM
-       Equivalient 24-hour time: 21:11
+       Equivalent 24-hour time: 21:11
 
    See Programming Project 8 for a description of the
    input format.
@@ -44,7 +44,7 @@ int main(void)
     int hour, minutes;
     char period;
   
-    printf("Enter a 12-hour clock time (hours:minutes AM/PM): ");
+    printf("Enter a 12-hour time (hours:minutes AM/PM): ");
     scanf("%d:%d %c", &hour, &minutes, &period);  /* the space before %c is important */
 
     if (hour < 1 || hour > 12) {
