@@ -26,7 +26,7 @@ int main(void)
     char first_initial, last_name;
    
     printf("\nEnter a first and last name: ");
-    scanf(" %c", &first_initial);    /* gets first letter of first name */
+    scanf(" %c", &first_initial);    /* gets first letter of first name. Ignores leading blank spaces. */
 
     while (getchar() != ' ') {
         /* ignore remaining first name characters until a blank space is reached */ ;
