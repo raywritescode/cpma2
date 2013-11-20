@@ -11,7 +11,7 @@
 
 int main(void)
 {
-   int myInt = 6;
+   int myInt = 5;
    int myArray[10] = { 0 };
 
    printf("\nmyInt value is %d\n", myInt);
