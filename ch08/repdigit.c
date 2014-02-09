@@ -24,7 +24,7 @@ int main(void)
    n /= 10;
    }
 
-   if (n > 0
+   if (n > 0)
       printf("Repeated digit\n");
    else
       printf("No repeated digit\n");
