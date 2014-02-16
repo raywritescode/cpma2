@@ -13,7 +13,6 @@
  * February 9, 2014
  *
  */
-
 #include <stdbool.h>  /* C99 only */
 #include <stdio.h>
 
