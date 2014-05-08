@@ -5,6 +5,9 @@
 *.swp
 *.swo
 
+#ignore these Windows-related files.
+*.exe
+
 # ignore this directory. Used for example programs from book chapters.
 examples
 exploring
