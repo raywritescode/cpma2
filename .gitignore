@@ -1,5 +1,6 @@
 # ignore these C-related files.
 *.out
+*.stackdump
 
 # ignore these vi-related files.
 *.swp
