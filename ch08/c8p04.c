@@ -8,7 +8,7 @@
  * with this value) for the array length.
  *
  * Ray Santos
- * May 12, 2014
+ * May 13, 2014
  *
  */
 
@@ -18,7 +18,17 @@
 
 int main(void) {
 
-   /* TO DO */
+   int a[10], i;
+
+   printf("Enter %d numbers: ", SIZE);
+
+   for (i = 0; i < SIZE; i++)
+      scanf("%d", &a[i]);
+
+   printf("In reverse order:");
+   for (i = SIZE - 1; i >= 0; i--)
+      printf(" %d", a[i]);
+   printf("\n");   
 
    return 0;
 }
