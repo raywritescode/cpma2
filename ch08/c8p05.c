@@ -17,12 +17,13 @@
 #define NUM_RATES ((int) (sizeof(value) / sizeof(value[0])))
 #define INITIAL_BALANCE 100.00
 #define TO_PERCENT 100.0
-#define COMPOUND_MONTHLY 12.0 
+#define COMPOUND_MONTHLY 12.0
+#define NUM_VALUES 5 
 
 int main(void)
 {
    int i, j, low_rate, num_years, year;
-   double value[5];
+   double value[NUM_VALUES];
 
    printf("\nEnter interest rate: ");
    scanf("%d", &low_rate);
