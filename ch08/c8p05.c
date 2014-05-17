@@ -43,7 +43,6 @@ int main(void)
       for (i = 0; i < NUM_RATES; i++) {
          for (j = 0; j < 12; j++) {
             value[i] += (low_rate + i) / TO_PERCENT / COMPOUND_MONTHLY * value[i];
-            // printf("%7.2f", value[i]);
          }
          printf("%7.2f", value[i]);
       }
