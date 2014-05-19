@@ -22,7 +22,7 @@
  * through the array, translating and printing characters one by one.
  *
  * Ray Santos
- * May 16, 2014
+ * May 18, 2014
  *
  */
 
@@ -30,7 +30,8 @@
 
 int main(void)
 {
-   /* TODO: define variables */
+   char message[];
+   int i;
 
    printf("Enter message: ");
    /* TODO: read in an array of characters */
