@@ -13,7 +13,7 @@
  *   Enter row 5: 6 14 2 6 0
  *
  *   Row totals: 30 27 40 36 28
- *   Column totals: 34 37 32 21
+ *   Column totals: 34 37 37 32 21
  *
  * Ray Santos
  * May 20, 2014
@@ -22,19 +22,46 @@
 
 #include <stdio.h>
 
+#define ROWS 5
+#define COLUMNS 5
+
 int main(void) {
-/*
-   initialize a 5 x 5 array
 
-   repeat five times
-      prompt for five integers for the current row
+   int matrix[ROWS][COLUMNS];
+   int i;
+   int j;
+   int row_total = 0;
+   int column_total = 0;
 
-   calculate the row sum totals
-   print the calculated row totals
+   /* Get user's input */
+   printf("Enter integers for a %d x %d matrix.\n\n", ROWS, COLUMNS);
+   for (i = 0; i < ROWS; i++) {
+      printf("Enter row %d: ", i + 1);
+      for (j = 0; j < COLUMNS; j++) {
+         scanf("%d", &matrix[i][j]);
+      }
+   }
 
-   calculate the column sum totals
-   print the calculated column totals
-*/
+   /* Print the calculated row totals */
+   printf("\nRow totals: ");
+   for (i = 0; i < ROWS; i++) {
+      for (j = 0; j < COLUMNS; j++) {
+         row_total += matrix[i][j];
+      }
+      printf("%d ", row_total);
+      row_total = 0;
+   }
+
+
+   /* Print the calculated column totals */
+   printf("\nColumn totals: ");
+   for (j = 0; j < COLUMNS; j++) {
+      for (i = 0; i < ROWS; i++) {
+         column_total += matrix[i][j];
+      }
+      printf("%d ", column_total);
+      column_total = 0;
+   }
 
    return 0;
 }
