@@ -52,7 +52,6 @@ int main(void) {
       row_total = 0;
    }
 
-
    /* Print the calculated column totals */
    printf("\nColumn totals: ");
    for (j = 0; j < COLUMNS; j++) {
