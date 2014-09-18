@@ -40,3 +40,33 @@ int main(void)
 
    return 0;
 }
+
+/* Example test run
+
+Enter an integer for each of the 10 prompts. The array's
+contents will be displayed after the last integer is entered.
+
+Enter an integer for element 1 of 10: 9
+Enter an integer for element 2 of 10: 7
+Enter an integer for element 3 of 10: 34
+Enter an integer for element 4 of 10: 6
+Enter an integer for element 5 of 10: 23
+Enter an integer for element 6 of 10: 678
+Enter an integer for element 7 of 10: 3
+Enter an integer for element 8 of 10: 4
+Enter an integer for element 9 of 10: 6
+Enter an integer for element 10 of 10: 62
+
+Contents of testArray with 10 elements
+testArray[0] = 9
+testArray[1] = 7
+testArray[2] = 34
+testArray[3] = 6
+testArray[4] = 23
+testArray[5] = 678
+testArray[6] = 3
+testArray[7] = 4
+testArray[8] = 6
+testArray[9] = 62
+
+*/
