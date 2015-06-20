@@ -16,9 +16,8 @@
 
 int main(void)
 {
-   int ab;
 
-   a/**/b = 0;
+   /* This is an unterminated comment
 
    printf("Ideally, gcc should have failed compiling this program\n");
 
@@ -29,9 +28,8 @@ int main(void)
 
 $ gcc -Wall unterminatedCommentTest.c 
 unterminatedCommentTest.c: In function ‘main’:
-unterminatedCommentTest.c:21:4: error: unknown type name ‘a’
-unterminatedCommentTest.c:21:9: warning: unused variable ‘b’ [-Wunused-variable]
-unterminatedCommentTest.c:19:8: warning: unused variable ‘ab’ [-Wunused-variable]
+unterminatedCommentTest.c:27:1: warning: "/*" within comment [-Wcomment]
+unterminatedCommentTest.c:18:1: error: expected declaration or statement at end of input
+unterminatedCommentTest.c:18:1: warning: control reaches end of non-void function [-Wreturn-type]
 
 */
-
