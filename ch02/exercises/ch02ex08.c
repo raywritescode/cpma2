@@ -6,7 +6,7 @@
   Ray Santos
   June 21, 2015
 
-  Q: How many tokens are thre in the following statement?
+  Q: How many tokens are there in the following statement?
 
      answer=(3*q-p*p)/3;
 
