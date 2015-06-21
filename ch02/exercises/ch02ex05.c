@@ -1,4 +1,4 @@
-/* ch02ex05.txt
+/* ch02ex05.c
 
   C programming: A Modern Approach, Second Edition
   Chapter 2. Page 33. Exercise 5
