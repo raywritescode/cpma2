@@ -24,22 +24,22 @@ int main(void)
   float c = 30.0;
 
   // (a) "%d" versus " %d"
-  printf("(a) \"%%d\" versus \" %%d\"\n\n");
+  printf("(a) \"%%d\" versus \" %%d\"\tNot equivalent\n\n");
   printf("\t \"%%d\" = %d\n", x);
   printf("\t\" %%d\" =  %d\n\n", x); 
 
   // (b) "%d-%d-%d" versus "%d -%d -%d"
-  printf("(b) \"%%d-%%-d-%%d\" versus \"%%d -%%d -%%d\"\n\n");
+  printf("(b) \"%%d-%%-d-%%d\" versus \"%%d -%%d -%%d\"\tNot equivalent\n\n");
   printf("\t   \"%%d-%%d-%%d\" = %d-%d-%d\n", x, y, z);
   printf("\t\"%%d -%%d - %%d\" = %d -%d -%d\n\n", x, y, z);
 
   // (c) "%f" versus "%f "
-  printf("(c) \"%%f\" versus \"%%f \"\n\n");
+  printf("(c) \"%%f\" versus \"%%f \"\tLooks equivalent to me\n\n");
   printf("\t \"%%f\" = %f\n", a);
   printf("\t\"%%f \" = %f \n\n", a);
 
   // (d) "%f,%f" versus "%f, %f"
-  printf("(d) \"%%f,%%f\" versus \"%%f, %%f\"\n\n");
+  printf("(d) \"%%f,%%f\" versus \"%%f, %%f\"\tNot equivalent\n\n");
   printf("\t \"%%f,%%f\" = %f,%f\n", a, b);
   printf("\t\"%%f, %%f\" = %f, %f\n\n", a, b);
 
@@ -50,22 +50,22 @@ int main(void)
 
 $ gcc ch03ex03.c 
 $ ./a.out
-(a) "%d" versus " %d"
+(a) "%d" versus " %d"	Not equivalent
 
 	 "%d" = 1
 	" %d" =  1
 
-(b) "%d-%-d-%d" versus "%d -%d -%d"
+(b) "%d-%-d-%d" versus "%d -%d -%d"	Not equivalent
 
 	   "%d-%d-%d" = 1-2-3
 	"%d -%d - %d" = 1 -2 -3
 
-(c) "%f" versus "%f "
+(c) "%f" versus "%f "	Looks equivalent to me
 
 	 "%f" = 10.000000
 	"%f " = 10.000000 
 
-(d) "%f,%f" versus "%f, %f"
+(d) "%f,%f" versus "%f, %f"	Not equivalent
 
 	 "%f,%f" = 10.000000,20.000000
 	"%f, %f" = 10.000000, 20.000000
