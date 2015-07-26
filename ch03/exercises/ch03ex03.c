@@ -21,7 +21,6 @@ int main(void)
 
   float a = 10.0;
   float b = 20.0;
-  float c = 30.0;
 
   // (a) "%d" versus " %d"
   printf("(a) \"%%d\" versus \" %%d\"\tNot equivalent\n\n");
