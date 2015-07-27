@@ -32,7 +32,7 @@
 
     3. Conversion specification %d: scanf reads the whitespace characters and ignores it.
        scanf reads the next character 5 and determines that integers can contain a 5.
-       scanf read the next character, a whitespace, which it ignores, and determines that
+       scanf reads the next character, a whitespace, which it ignores, and determines that
        no more characters are to be read for the conversion specification %d.
        The value of j is 5
 
@@ -47,7 +47,7 @@
        Note: if a float doesn't contain a non-zero value before the decimal point, C prints
              a 0 before the decimal point. If a float conversion specifier doesn't contain
              any format specifications, C prints decimals to six places after the decimal
-             and adds zeroes where needed. 
+             and adds zeroes where needed by default. 
 
 */
 
