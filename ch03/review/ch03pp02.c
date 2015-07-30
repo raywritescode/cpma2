@@ -11,11 +11,11 @@
 
     Enter item number: 583
     Enter unit price: 13.5
-    Enter purchase date (mm/dd/yyyy): 10/24/2010
+    Enter purchase date (mm/dd/yyyy): 7/29/2015
 
     Item            Unit            Purchase
                     Price           Date
-    583             $  13.50        10/24/2010
+    583             $  13.50        07/29/2015
 
   The item number and date should be left justified; the unit price
   should be right justified. Allow dollar amounts up to $9999.99.
@@ -53,20 +53,20 @@ $ ./a.out
 
 Enter item number: 583
 Enter unit price: 13.5
-Enter purchase date (mm/dd/yyyy): 10/24/2010
+Enter purchase date (mm/dd/yyyy): 7/29/2015
 
 Item		Unit		Purchase
 		Price		Date
-583		$  13.50	10/24/2010
+583		$  13.50	07/29/2015
 
 $ ./a.out
 
 Enter item number: 001
 Enter unit price: 9999.99
-Enter purchase date (mm/dd/yyyy): 1/1/2015
+Enter purchase date (mm/dd/yyyy): 10/1/2015
 
 Item		Unit		Purchase
 		Price		Date
-1		$9999.99	01/01/2015
+1		$9999.99	10/01/2015
  
 */
