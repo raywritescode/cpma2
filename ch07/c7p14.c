@@ -40,6 +40,36 @@
 
 int main(void)
 {
+   double x, y = 1, sqrt;
+   int terminate = 0;
+
+   printf("Enter a positive number: ");
+   scanf("%lf", &x);
+
+   do {
+      sqrt = ((y + (x / y)) / 2);
+      if ( fabs(y - sqrt) < (.00001 * y))
+         terminate = 1;
+      y = sqrt;     
+   } while ( terminate != 1 );
+
+   printf("Square root: %.5f\n", sqrt);
 
    return 0;
 }
+
+/* Example runs
+
+$ gcc -Wall c7p14.c 
+$ ./a.out
+Enter a positive number: 3
+Square root: 1.73205
+$ ./a.out
+Enter a positive number: 25
+Square root: 5.00000
+$ ./a.out
+Enter a positive number: 81
+Square root: 9.00000
+$
+
+*/
