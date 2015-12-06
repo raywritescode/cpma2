@@ -48,10 +48,10 @@ int main(void)
 
    do {
       sqrt = ((y + (x / y)) / 2);
-      if ( fabs(y - sqrt) < (.00001 * y))
+      if (fabs(y - sqrt) < (.00001 * y))
          terminate = 1;
       y = sqrt;     
-   } while ( terminate != 1 );
+   } while (terminate != 1);
 
    printf("Square root: %.5f\n", sqrt);
 
