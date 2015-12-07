@@ -50,7 +50,7 @@ int main(void)
    } else 
       printf("\nFactorial of %d is: %d\n", n, factorial);  
 
-   printf("\nThe largest value a short int can hold on this machine is %d\n\n", SHRT_MAX);
+   printf("\nThe largest value a short int can hold on this machine is %d\n\n", largest);
    
 return 0;
 }
