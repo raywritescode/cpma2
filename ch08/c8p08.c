@@ -14,7 +14,7 @@
   [rsantos] Here's how I envision the running program:
 
      How many students? 5
-     How many quizes? 5
+     How many quizzes? 5
 
      Student 1
         Enter score for Quiz 1: 1
@@ -106,6 +106,46 @@
 
 int main(void) {
 
+   int i; // counter
+   int j; // counter
+   int number_of_quizzes;
+   int number_of_students;
+   int total_score;
 
+   printf("How many students? ");
+   scanf("%d", &number_of_students);
+
+   printf("How many quizzes? ");
+   scanf("%d", &number_of_quizzes);
+
+   int student_quiz[number_of_students][number_of_quizzes];
+
+   // Get quiz scores for each student
+   for (i = 1; i <= number_of_students; i++) {
+      printf("\nStudent %d\n", i);
+      for (j = 1; j <= number_of_quizzes; j++) {
+         printf("   Enter score for Quiz %d: ", j);
+         scanf("%d", &student_quiz[i][j]);
+      }    
+   } 
+
+   printf("\n======= Quiz Results =======\n\n");
+  
+   // Print the quiz results for each student
+   for (i = 1; i <= number_of_students; i++) {
+      total_score = 0;
+      
+      printf("Student %d\n", i);
+
+      for (j = 1; j <= number_of_quizzes; j++) {
+         total_score += student_quiz[i][j];
+      }
+      printf("    Total score: %d\n", total_score);
+      printf("  Average score: %d\n\n", (total_score / number_of_quizzes));
+   }
+
+   // Print the average, high, and low scores for each quiz
+   // TODO
+  
    return 0;
 }
