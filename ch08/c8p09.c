@@ -53,9 +53,36 @@
 #include <stdlib.h>
 #include <time.h>
 
+#define COLUMN 10
+#define ROW 10
+
 int main(void)
 {
+/*
+   initialize variables
+      direction of next move (integer)
+      is outside the array (boolean)
+      is blocked (boolean)
 
+   begin program
+      create the 10x10 array of the '.' character
+      choose an array element
+      for the letters A through Z
+         if the array element is a '.' character
+            replace the '.' character with the letter
+            choose a new array element
+            continue to the next letter
+         otherwise
+            choose a new array element one direction (north, south, east, or west)
+            if the new array element contains a letter or is out of bounds
+               continue out of the loop (to choose a new array element one direction) 
+            if there are no more array elements to go to
+               break out of the loop (all four directions are blocked)       
+            otherwise
+               replace the '.' character with the letter
 
+      display the contents of the 10x10 array
+               
+*/
    return 0;
 }
