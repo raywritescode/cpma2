@@ -49,6 +49,7 @@
 
 */
 
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -58,16 +59,44 @@
 
 int main(void)
 {
-/*
-   initialize variables
-      direction of next move (integer)
-      is outside the array (boolean)
-      is blocked (boolean)
+   bool is_blocked;
+   bool is_outside;
+   int column;
+   int i; // counter
+   int j; // counter
+   int next_move;
+   int row;
+  
+   char matrix[ROW][COLUMN];
 
-   begin program
-      create the 10x10 array of the '.' character
-      choose an array element
-      for the letters A through Z
+   srand((unsigned) time(NULL));
+
+   // create the 10x10 array of the '.' character
+   for (i = 0; i < ROW; i++ ) {
+      for (j = 0; j < COLUMN; j++) {
+         matrix[i][j] = '.';
+      }
+   }
+
+   // print the 10x10 matrix - NOTE: A visual check only to see the populated matrix
+   for (i = 0; i < ROW; i++) {
+      for (j = 0; j < COLUMN; j++) {
+         printf("%c ", matrix[i][j]);
+      }
+      printf("\n");
+   }
+
+   // choose a random starting array element
+   row = rand() % ROW;        // picks a random row
+   column = rand() % COLUMN;  // picks a random column
+
+   // for the letters A through Z - NOTE: Printing A through Z for now   
+   for (i = 'A'; i <= 'Z'; i++) {
+      printf("%c ", i);
+   }
+   printf("\n");
+
+/*
          if the array element is a '.' character
             replace the '.' character with the letter
             choose a new array element
