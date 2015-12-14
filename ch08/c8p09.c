@@ -78,29 +78,28 @@ int main(void)
       }
    }
 
-   // print the 10x10 matrix - NOTE: A visual check only to see the populated matrix
+   // for the letters A through Z   
+   for (i = 'A'; i <= 'Z'; i++) {
+
+      // choose a random array element
+      row = rand() % ROW;                      // picks a random row
+      column = rand() % COLUMN;                // picks a random column
+
+      if (matrix[row][column] == '.') {        // element is a '.' so replace it with the letter
+         matrix[row][column] = i;
+      } else 
+         i--; // reuse the current letter on next loop - NOTE: populating matrix randomly with A-Z for now. 
+   }
+
+   // display the contents of the 10x10 array
    for (i = 0; i < ROW; i++) {
       for (j = 0; j < COLUMN; j++) {
          printf("%c ", matrix[i][j]);
-      }
+      }   
       printf("\n");
-   }
-
-   // choose a random starting array element
-   row = rand() % ROW;        // picks a random row
-   column = rand() % COLUMN;  // picks a random column
-
-   // for the letters A through Z - NOTE: Printing A through Z for now   
-   for (i = 'A'; i <= 'Z'; i++) {
-      printf("%c ", i);
-   }
-   printf("\n");
+   }   
 
 /*
-         if the array element is a '.' character
-            replace the '.' character with the letter
-            choose a new array element
-            continue to the next letter
          otherwise
             choose a new array element one direction (north, south, east, or west)
             if the new array element contains a letter or is out of bounds
@@ -110,8 +109,6 @@ int main(void)
             otherwise
                replace the '.' character with the letter
 
-      display the contents of the 10x10 array
-               
 */
    return 0;
 }
