@@ -59,8 +59,8 @@
 
 int main(void)
 {
-   bool is_blocked;
-   bool is_outside;
+   int blocked_by_letter = 0;
+   int blocked_by_border = 0;
    int column;
    int i; // counter
    int j; // counter
@@ -78,20 +78,70 @@ int main(void)
       }
    }
 
+   // choose a random array element starting point
+   row = rand() % ROW;                      // picks a random row
+   column = rand() % COLUMN;                // picks a random column
+
    // for the letters A through Z   
    for (i = 'A'; i <= 'Z'; i++) {
 
-      // choose a random array element
-      row = rand() % ROW;                      // picks a random row
-      column = rand() % COLUMN;                // picks a random column
-
       if (matrix[row][column] == '.') {        // element is a '.' so replace it with the letter
          matrix[row][column] = i;
-      } else 
-         i--; // reuse the current letter on next loop - NOTE: populating matrix randomly with A-Z for now. 
+      } else {
+         // choose a new array element one direction (north, south, east, or west)
+         switch (next_move = (rand() % ROW) % 4) {
+            case 0:
+               printf("0 (North) is the direction\n");
+               matrix[row--][column]; // move one element north
+               break;
+            case 1:
+               printf("1 (South) is the direction\n");
+               matrix[row++][column];   // move one element south
+               break;
+            case 2:
+               printf("2 (East) is the direction\n");
+               matrix[row][column++];   // move one element east
+               break;
+            case 3:
+               printf("3 (West) is the direction\n");
+               matrix[row][column--];   // move one element west
+               break;
+            default:
+               printf("%d (other) is the direction\n", next_move);
+               break;
+         }
+         // if the new array element is out of bounds or already contains a letter
+         if (row < 0) {                      // out of bounds
+            printf("row is < 0: %d\n", row);
+            row++;
+            blocked_by_border++;
+         } else if (row > 9) {               // out of bounds
+            row--;
+            blocked_by_border++;
+         } else if (column < 0) {            // out of bounds
+            column++;
+            blocked_by_border++;
+         } else if (column > 9) {            // out of bounds
+            column--;
+            blocked_by_border++;
+         } else if (matrix[row][column] != '.') {  // already contains a letter
+            blocked_by_letter++;
+         } else {
+             matrix[row][column] = i; // new array element is available to use
+             continue;
+         }
+         // if there are no more array elements to go to
+         if (blocked_by_letter >= 4 || (blocked_by_letter >= 3 && blocked_by_border >= 1)) {
+            // terminate the program (all four directions are blocked)
+            exit;
+         }
+         i--;                  // return to the original letter on next loop 
+      }
    }
 
    // display the contents of the 10x10 array
+   printf("\n");
+
    for (i = 0; i < ROW; i++) {
       for (j = 0; j < COLUMN; j++) {
          printf("%c ", matrix[i][j]);
@@ -99,16 +149,5 @@ int main(void)
       printf("\n");
    }   
 
-/*
-         otherwise
-            choose a new array element one direction (north, south, east, or west)
-            if the new array element contains a letter or is out of bounds
-               continue out of the loop (to choose a new array element one direction) 
-            if there are no more array elements to go to
-               break out of the loop (all four directions are blocked)       
-            otherwise
-               replace the '.' character with the letter
-
-*/
    return 0;
 }
