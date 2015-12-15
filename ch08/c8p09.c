@@ -124,16 +124,30 @@ int main(void)
          } else if (column > 9) {            // out of bounds
             column--;
             blocked_by_border++;
-         } else if (matrix[row][column] != '.') {  // already contains a letter
+         } else if (matrix[row][column] != '.') {  // already contains a letter. return to original element.
+            switch (next_move) {
+               case 0:
+                  row++;
+                  break;
+               case 1:
+                  row--;
+                  break;
+               case 2:
+                  column--;
+                  break;
+               case 3:
+                  column++;
+                  break;
+            }
             blocked_by_letter++;
          } else {
              matrix[row][column] = i; // new array element is available to use
              continue;
          }
          // if there are no more array elements to go to
-         if (blocked_by_letter >= 4 || (blocked_by_letter >= 3 && blocked_by_border >= 1)) {
+         if ((blocked_by_letter >= 3 && blocked_by_border >= 1)) || blocked_by_letter >= 4) {
             // terminate the program (all four directions are blocked)
-            exit;
+            break;
          }
          i--;                  // return to the original letter on next loop 
       }
@@ -151,3 +165,36 @@ int main(void)
 
    return 0;
 }
+
+/* 15Dec2015 - New pseudocode algorithm
+
+create the 10x10 matrix
+select a random starting cell
+put letter A in the starting cell
+
+for letters B through Z
+   pick a N, S, E, W direction
+   if the new direction is not blocked
+      if the new cell is open
+         put the current letter in the cell
+         continue to the next letter
+      if the new cell is out of bounds
+         mark the direction as blocked
+         return to the previous cell
+         continue to the next letter
+      if the new cell already has a letter
+         mark the direction as blocked
+         return to the previous cell 
+         continue to the next letter
+   if the new direction is blocked
+      if the N, S, E, W directions are blocked
+         break out of the for loop
+      otherwise
+         continue to the next letter
+
+display the 10x10 matrix
+end the program
+
+NOTE: come up with this at 1:40 AM
+
+*/
