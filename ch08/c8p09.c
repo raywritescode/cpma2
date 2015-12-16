@@ -59,97 +59,119 @@
 
 int main(void)
 {
-   int blocked_by_letter = 0;
-   int blocked_by_border = 0;
+   _Bool isBlocked = false;
+   _Bool isEastBlocked = false;
+   _Bool isNorthBlocked = false;
+   _Bool isSouthBlocked = false;
+   _Bool isWestBlocked = false;
+
    int column;
+   int direction;
    int i; // counter
    int j; // counter
-   int next_move;
    int row;
   
    char matrix[ROW][COLUMN];
 
    srand((unsigned) time(NULL));
 
-   // create the 10x10 array of the '.' character
+   // create the 10x10 matrix
    for (i = 0; i < ROW; i++ ) {
       for (j = 0; j < COLUMN; j++) {
          matrix[i][j] = '.';
       }
    }
 
-   // choose a random array element starting point
+   // select a random starting cell
    row = rand() % ROW;                      // picks a random row
    column = rand() % COLUMN;                // picks a random column
 
-   // for the letters A through Z   
-   for (i = 'A'; i <= 'Z'; i++) {
+   // put letter A in a matrix element
+   matrix[row][column] = 'A';
 
-      if (matrix[row][column] == '.') {        // element is a '.' so replace it with the letter
-         matrix[row][column] = i;
-      } else {
-         // choose a new array element one direction (north, south, east, or west)
-         switch (next_move = (rand() % ROW) % 4) {
-            case 0:
-               printf("0 (North) is the direction\n");
-               matrix[row--][column]; // move one element north
-               break;
-            case 1:
-               printf("1 (South) is the direction\n");
-               matrix[row++][column];   // move one element south
-               break;
-            case 2:
-               printf("2 (East) is the direction\n");
-               matrix[row][column++];   // move one element east
-               break;
-            case 3:
-               printf("3 (West) is the direction\n");
-               matrix[row][column--];   // move one element west
-               break;
-            default:
-               printf("%d (other) is the direction\n", next_move);
-               break;
+   // for the letters B through Z   
+   for (i = 'B'; i <= 'Z'; i++) {
+      printf("Current letter is: %c ", i);
+
+      // pick a N, S, E, W direction
+      switch (direction = (rand() % ROW) % 4) {
+         case 0:
+            printf("0 (North) is the direction\n");
+            if (row-- < 0) {
+               row++;
+               isNorthBlocked = true;
+            } 
+            isBlocked = isNorthBlocked;
+            break;
+         case 1:
+            printf("1 (South) is the direction\n");
+            if (row++ > 9) {
+               row--;
+               isSouthBlocked = true;
+            }
+            isBlocked = isSouthBlocked;
+            break;
+         case 2:
+            printf("2 (East) is the direction\n");
+            if (column++ > 9) {
+               column--;
+               isEastBlocked = true;
+            }
+            isBlocked = isEastBlocked;
+            break;
+         case 3:
+            printf("3 (West) is the direction\n");
+            if (column-- < 0) {
+               column++;
+               isWestBlocked = true;
+            }
+            isBlocked = isWestBlocked;
+            break;
+      } // end switch
+
+      // check if the new direction is not blocked
+      if (!isBlocked) {                       // new direction is not blocked
+
+         // the new cell is open
+         if (matrix[row][column] == '.') {        
+            matrix[row][column] = i;          // put the current letter in the cell  
+
+            // set the N, S, E, W blocked statuses to false
+            isNorthBlocked = false;
+            isSouthBlocked = false;
+            isEastBlocked = false;
+            isWestBlocked = false;
+            
+            // continue to next letter
+            continue;
          }
-         // if the new array element is out of bounds or already contains a letter
-         if (row < 0) {                      // out of bounds
-            printf("row is < 0: %d\n", row);
-            row++;
-            blocked_by_border++;
-         } else if (row > 9) {               // out of bounds
-            row--;
-            blocked_by_border++;
-         } else if (column < 0) {            // out of bounds
-            column++;
-            blocked_by_border++;
-         } else if (column > 9) {            // out of bounds
-            column--;
-            blocked_by_border++;
-         } else if (matrix[row][column] != '.') {  // already contains a letter. return to original element.
-            switch (next_move) {
+
+         // if the new cell already has a letter
+         if (matrix[row][column] != '.') {
+            // mark the direction as blocked
+            switch (direction) {
                case 0:
-                  row++;
+              //    row++;
+                  isNorthBlocked = true;
+                  i--;
                   break;
                case 1:
-                  row--;
+              //    row--;
+                  isSouthBlocked = true;
+                  i--;
                   break;
                case 2:
-                  column--;
+              //    column--;
+                  isEastBlocked = true;
+                  i--;
                   break;
                case 3:
-                  column++;
+              //    column++;
+                  isWestBlocked = true;
+                  i--;
                   break;
-            }
-            blocked_by_letter++;
-         } else {
-             matrix[row][column] = i; // new array element is available to use
-             continue;
+            } // end switch
          }
-         // if there are no more array elements to go to
-         if ((blocked_by_letter >= 3 && blocked_by_border >= 1)) || blocked_by_letter >= 4) {
-            // terminate the program (all four directions are blocked)
-            break;
-         }
-         i--;                  // return to the original letter on next loop 
       }
    }
 
@@ -162,9 +184,9 @@ int main(void)
       }   
       printf("\n");
    }   
-
    return 0;
-}
+}  
+
 
 /* 15Dec2015 - New pseudocode algorithm
 
