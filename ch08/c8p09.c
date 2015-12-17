@@ -45,7 +45,7 @@
   Y is blocked on all four sides, so there's no place to put Z.
 
   Ray Santos
-  December 10, 2015
+  December 16, 2015
 
 */
 
@@ -59,12 +59,12 @@
 
 int main(void)
 {
-
    int col;
    int direction;
    int i;
    int j;
    int row;
+   int timesBlocked = 0;
 
    char matrix[ROW][COL];
    char trappedLetter;
@@ -88,21 +88,44 @@ int main(void)
 
    // Repeat for letters 'B' to 'Z'
    for (i = 'B'; i <= 'Z'; i++) {
-      printf("Letter is: %c\n", i); 
+      /* printf("Letter is: %c\n", i); */ 
 
       // pick a random direction (0 = North, 1 = South, 2 = East, 3 = West)
       direction = ((rand() % ROW) % 4); 
-      printf("   Direction is: %d\n", direction);
+      /* printf("   Direction is: %d\n", direction); */
 
       // put the letter in the adjoining cell of the given direction if the
       // cell is available (not out of bounds and not occupied by a letter). 
       switch(direction) {
          case 0: // north
             if ((row - 1  >= 0) && (matrix[row - 1][col] == '.')) {
-               matrix[--row][col] = i;
+               matrix[--row][col] = i; // north is open
                break;
+            } else {
+               timesBlocked++;
             }
-            i--;
+
+            if ((row + 1 <= 9) && (matrix[row + 1][col] == '.')) {
+               matrix[++row][col] = i; // south is open
+               break;
+            } else {
+               timesBlocked++;
+            }
+            
+            if ((col + 1 <= 9) && (matrix[row][col + 1] == '.')) {
+               matrix[row][++col] = i; // east is open
+               break;
+            } else {
+               timesBlocked++;
+            }
+
+            if ((col - 1 >= 0) && (matrix[row][col - 1] == '.')) {
+               matrix[row][--col] = i; // west is open
+               break;
+            } else {
+               timesBlocked++;
+            }
+
             break;
          case 1: // south
             if ((row + 1 <= 9) && (matrix[row + 1][col] == '.')) {
@@ -126,6 +149,15 @@ int main(void)
             i--;
             break;
       } // end switch
+
+      if (timesBlocked == 4) {  // letter is blocked on all four sides
+         isTrapped = true;
+         trappedLetter = --i;
+         break;
+      } 
+
+      timesBlocked = 0;
+
    } // end for
 
    // display the 10x10 matrix
@@ -145,3 +177,52 @@ int main(void)
 
    return 0;
 }
+
+/* Example runs
+
+$ gcc -Wall c8p09.c 
+$ ./a.out
+
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . B A . . 
+. . . . . . C . . . 
+. . . . . E D . . . 
+. . . L K F . . . . 
+. . . M J G . . . . 
+. . O N I H . . . . 
+. . P Y X W V . . . 
+. . Q R S T U . . . 
+
+The letter Y got trapped!
+$ ./a.out
+
+K L M . . . . . . . 
+J I N . . . . . . . 
+G H O . . . . . . . 
+F S P . . . . . . . 
+E R Q . . . . . . . 
+D . . . . . . . . . 
+C . . . . . . . . . 
+B . . . . . . . . . 
+A . . . . . . . . . 
+. . . . . . . . . . 
+
+The letter S got trapped!
+$ ./a.out
+
+. X Y Z . . . . . . 
+. W V . . . . . . . 
+. T U . A . . . . . 
+. S . . B . . . . . 
+Q R . . C . . . . . 
+P O . . D . . . . . 
+M N . . E . . . . . 
+L K . G F . . . . . 
+. J I H . . . . . . 
+. . . . . . . . . . 
+
+Completed 'A' through 'Z'
+$ 
+
+*/
