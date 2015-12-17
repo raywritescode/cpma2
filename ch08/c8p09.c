@@ -54,169 +54,94 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define COLUMN 10
+#define COL 10
 #define ROW 10
 
 int main(void)
 {
-   _Bool isBlocked = false;
-   _Bool isEastBlocked = false;
-   _Bool isNorthBlocked = false;
-   _Bool isSouthBlocked = false;
-   _Bool isWestBlocked = false;
 
-   int column;
+   int col;
    int direction;
-   int i; // counter
-   int j; // counter
+   int i;
+   int j;
    int row;
-  
-   char matrix[ROW][COLUMN];
 
-   srand((unsigned) time(NULL));
+   char matrix[ROW][COL];
+   char trappedLetter;
 
-   // create the 10x10 matrix
-   for (i = 0; i < ROW; i++ ) {
-      for (j = 0; j < COLUMN; j++) {
+   _Bool isTrapped = false;
+
+   // create a 10x10 matrix populated with the '.' (period) character.
+   for (i = 0; i < ROW; i++) {
+      for (j = 0; j < COL; j++) {
          matrix[i][j] = '.';
       }
    }
 
-   // select a random starting cell
-   row = rand() % ROW;                      // picks a random row
-   column = rand() % COLUMN;                // picks a random column
+   // pick a random starting cell in the matrix
+   srand((unsigned) time(NULL));
+   row = rand() % ROW;
+   col = rand() % COL;
 
-   // put letter A in a matrix element
-   matrix[row][column] = 'A';
+   // put letter 'A' in the starting cell
+   matrix[row][col] = 'A';
 
-   // for the letters B through Z   
+   // Repeat for letters 'B' to 'Z'
    for (i = 'B'; i <= 'Z'; i++) {
-      printf("Current letter is: %c ", i);
+      printf("Letter is: %c\n", i); 
 
-      // pick a N, S, E, W direction
-      switch (direction = (rand() % ROW) % 4) {
-         case 0:
-            printf("0 (North) is the direction\n");
-            if (row-- < 0) {
-               row++;
-               isNorthBlocked = true;
-            } 
-            isBlocked = isNorthBlocked;
-            break;
-         case 1:
-            printf("1 (South) is the direction\n");
-            if (row++ > 9) {
-               row--;
-               isSouthBlocked = true;
+      // pick a random direction (0 = North, 1 = South, 2 = East, 3 = West)
+      direction = ((rand() % ROW) % 4); 
+      printf("   Direction is: %d\n", direction);
+
+      // put the letter in the adjoining cell of the given direction if the
+      // cell is available (not out of bounds and not occupied by a letter). 
+      switch(direction) {
+         case 0: // north
+            if ((row - 1  >= 0) && (matrix[row - 1][col] == '.')) {
+               matrix[--row][col] = i;
+               break;
             }
-            isBlocked = isSouthBlocked;
+            i--;
             break;
-         case 2:
-            printf("2 (East) is the direction\n");
-            if (column++ > 9) {
-               column--;
-               isEastBlocked = true;
+         case 1: // south
+            if ((row + 1 <= 9) && (matrix[row + 1][col] == '.')) {
+               matrix[++row][col] = i;
+               break;
             }
-            isBlocked = isEastBlocked;
+            i--;
             break;
-         case 3:
-            printf("3 (West) is the direction\n");
-            if (column-- < 0) {
-               column++;
-               isWestBlocked = true;
+         case 2: // east
+            if ((col + 1 <= 9) && (matrix[row][col + 1] == '.')) {
+               matrix[row][++col] = i;
+               break;
             }
-            isBlocked = isWestBlocked;
+            i--;
+            break;
+         case 3: // west
+            if ((col - 1 >= 0) && (matrix[row][col - 1] == '.')) {
+               matrix[row][--col] = i;
+               break;
+            }
+            i--;
             break;
       } // end switch
+   } // end for
 
-      // check if the new direction is not blocked
-      if (!isBlocked) {                       // new direction is not blocked
-
-         // the new cell is open
-         if (matrix[row][column] == '.') {        
-            matrix[row][column] = i;          // put the current letter in the cell  
-
-            // set the N, S, E, W blocked statuses to false
-            isNorthBlocked = false;
-            isSouthBlocked = false;
-            isEastBlocked = false;
-            isWestBlocked = false;
-            
-            // continue to next letter
-            continue;
-         }
-
-         // if the new cell already has a letter
-         if (matrix[row][column] != '.') {
-            // mark the direction as blocked
-            switch (direction) {
-               case 0:
-              //    row++;
-                  isNorthBlocked = true;
-                  i--;
-                  break;
-               case 1:
-              //    row--;
-                  isSouthBlocked = true;
-                  i--;
-                  break;
-               case 2:
-              //    column--;
-                  isEastBlocked = true;
-                  i--;
-                  break;
-               case 3:
-              //    column++;
-                  isWestBlocked = true;
-                  i--;
-                  break;
-            } // end switch
-         }
-      }
-   }
-
-   // display the contents of the 10x10 array
+   // display the 10x10 matrix
    printf("\n");
 
    for (i = 0; i < ROW; i++) {
-      for (j = 0; j < COLUMN; j++) {
+      for (j = 0; j < COL; j++) {
          printf("%c ", matrix[i][j]);
-      }   
+      }
       printf("\n");
-   }   
+   }
+
+   if (isTrapped)
+      printf("\nThe letter %c got trapped!\n", trappedLetter);
+   else
+      printf("\nCompleted 'A' through 'Z'\n");
+
    return 0;
-}  
-
-
-/* 15Dec2015 - New pseudocode algorithm
-
-create the 10x10 matrix
-select a random starting cell
-put letter A in the starting cell
-
-for letters B through Z
-   pick a N, S, E, W direction
-   if the new direction is not blocked
-      if the new cell is open
-         put the current letter in the cell
-         continue to the next letter
-      if the new cell is out of bounds
-         mark the direction as blocked
-         return to the previous cell
-         continue to the next letter
-      if the new cell already has a letter
-         mark the direction as blocked
-         return to the previous cell 
-         continue to the next letter
-   if the new direction is blocked
-      if the N, S, E, W directions are blocked
-         break out of the for loop
-      otherwise
-         continue to the next letter
-
-display the 10x10 matrix
-end the program
-
-NOTE: come up with this at 1:40 AM
-
-*/
+}
