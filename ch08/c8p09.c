@@ -45,7 +45,7 @@
   Y is blocked on all four sides, so there's no place to put Z.
 
   Ray Santos
-  December 16, 2015
+  December 17, 2015
 
 */
 
@@ -88,75 +88,158 @@ int main(void)
 
    // Repeat for letters 'B' to 'Z'
    for (i = 'B'; i <= 'Z'; i++) {
-      /* printf("Letter is: %c\n", i); */ 
 
       // pick a random direction (0 = North, 1 = South, 2 = East, 3 = West)
       direction = ((rand() % ROW) % 4); 
-      /* printf("   Direction is: %d\n", direction); */
 
       // put the letter in the adjoining cell of the given direction if the
       // cell is available (not out of bounds and not occupied by a letter). 
       switch(direction) {
-         case 0: // north
+         case 0: // North is the direction. 
             if ((row - 1  >= 0) && (matrix[row - 1][col] == '.')) {
-               matrix[--row][col] = i; // north is open
+               matrix[--row][col] = i; // North is open
+               printf("North: %c North to %c\n", i - 1, i);
                break;
             } else {
                timesBlocked++;
             }
 
             if ((row + 1 <= 9) && (matrix[row + 1][col] == '.')) {
-               matrix[++row][col] = i; // south is open
+               matrix[++row][col] = i; // South is open
+               printf("North: %c South to %c\n", i - 1, i);
                break;
             } else {
                timesBlocked++;
             }
             
             if ((col + 1 <= 9) && (matrix[row][col + 1] == '.')) {
-               matrix[row][++col] = i; // east is open
+               matrix[row][++col] = i; // East is open
+               printf("North: %c East to %c\n", i - 1, i);
                break;
             } else {
                timesBlocked++;
             }
 
             if ((col - 1 >= 0) && (matrix[row][col - 1] == '.')) {
-               matrix[row][--col] = i; // west is open
+               matrix[row][--col] = i; // West is open
+               printf("North: %c West to %c\n", i - 1, i);
                break;
             } else {
                timesBlocked++;
             }
 
             break;
-         case 1: // south
+         case 1: // South is the direction
             if ((row + 1 <= 9) && (matrix[row + 1][col] == '.')) {
-               matrix[++row][col] = i;
+               matrix[++row][col] = i; // South is open
+               printf("South: %c South to %c\n", i - 1, i);
                break;
+            } else {
+               timesBlocked++;
             }
-            i--;
-            break;
-         case 2: // east
+
+            if ((row - 1  >= 0) && (matrix[row - 1][col] == '.')) {
+               matrix[--row][col] = i; // North is open
+               printf("South: %c North to %c\n", i - 1, i);
+               break;
+            } else {
+               timesBlocked++;
+            }
+
             if ((col + 1 <= 9) && (matrix[row][col + 1] == '.')) {
-               matrix[row][++col] = i;
+               matrix[row][++col] = i; // East is open
+               printf("South: %c East to %c\n", i - 1, i);
                break;
+            } else {
+               timesBlocked++;
             }
-            i--;
-            break;
-         case 3: // west
+ 
             if ((col - 1 >= 0) && (matrix[row][col - 1] == '.')) {
-               matrix[row][--col] = i;
+               matrix[row][--col] = i; // West is open
+               printf("South: %c West to %c\n", i - 1, i);
                break;
+            } else {
+               timesBlocked++;
             }
-            i--;
+ 
+            break;
+         case 2: // East is the direction
+            if ((col + 1 <= 9) && (matrix[row][col + 1] == '.')) {
+               matrix[row][++col] = i; // East is open
+               printf(" East: %c East to %c\n", i - 1, i);
+               break;
+            } else {
+               timesBlocked++;
+            }
+ 
+            if ((col - 1 >= 0) && (matrix[row][col - 1] == '.')) {
+               matrix[row][--col] = i; // West is open
+               printf(" East: %c West to %c\n", i - 1, i);
+               break;
+            } else {
+               timesBlocked++;
+            }
+
+            if ((row - 1  >= 0) && (matrix[row - 1][col] == '.')) {
+               matrix[--row][col] = i; // North is open
+               printf(" East: %c North to %c\n", i - 1, i);
+               break;
+            } else {
+               timesBlocked++;
+            }
+
+            if ((row + 1 <= 9) && (matrix[row + 1][col] == '.')) {
+               matrix[++row][col] = i; // South is open
+               printf(" East: %c South to %c\n", i - 1, i);
+               break;
+            } else {
+               timesBlocked++;
+            }
+ 
+            break;
+         case 3: // West is the direction
+            if ((col - 1 >= 0) && (matrix[row][col - 1] == '.')) {
+               matrix[row][--col] = i; // West is open
+               printf(" West: %c West to %c\n", i - 1, i);
+               break;
+            } else {
+               timesBlocked++;
+            }
+
+            if ((col + 1 <= 9) && (matrix[row][col + 1] == '.')) {
+               matrix[row][++col] = i; // East is open
+               printf(" West: %c East to %c\n", i - 1, i);
+               break;
+            } else {
+               timesBlocked++;
+            }
+
+            if ((row - 1  >= 0) && (matrix[row - 1][col] == '.')) {
+               matrix[--row][col] = i; // North is open
+               printf(" West: %c North to %c\n", i - 1, i);
+               break;
+            } else {
+               timesBlocked++;
+            }
+
+            if ((row + 1 <= 9) && (matrix[row + 1][col] == '.')) {
+               matrix[++row][col] = i; // South is open
+               printf(" West: %c South to %c\n", i - 1, i);
+               break;
+            } else {
+               timesBlocked++;
+            }
+ 
             break;
       } // end switch
 
       if (timesBlocked == 4) {  // letter is blocked on all four sides
          isTrapped = true;
          trappedLetter = --i;
-         break;
+         break;                 // exit the for loop
       } 
 
-      timesBlocked = 0;
+      timesBlocked = 0;         // letter found a home. Clear the counter for next letter.
 
    } // end for
 
@@ -182,47 +265,66 @@ int main(void)
 
 $ gcc -Wall c8p09.c 
 $ ./a.out
+North: A North to B
+South: B North to C
+North: C North to D
+North: D North to E
+ East: E East to F
+ West: F East to G
+North: G North to H
+South: H East to I
+South: I South to J
+ West: J East to K
+North: K North to L
+South: L East to M
+ West: M East to N
+ East: N East to O
+ East: O East to P
+ East: P South to Q
+ West: Q West to R
+North: R South to S
+ East: S East to T
+North: T South to U
+South: U South to V
+North: V South to W
+ East: W West to X
+North: X North to Y
+South: Y North to Z
 
+. . . H I L M N O P 
+. E F G J K . . R Q 
+. D . . . . . . S T 
+. C . . . . . . Z U 
+. B . . . . . . Y V 
+. A . . . . . . X W 
 . . . . . . . . . . 
 . . . . . . . . . . 
-. . . . . . B A . . 
-. . . . . . C . . . 
-. . . . . E D . . . 
-. . . L K F . . . . 
-. . . M J G . . . . 
-. . O N I H . . . . 
-. . P Y X W V . . . 
-. . Q R S T U . . . 
-
-The letter Y got trapped!
-$ ./a.out
-
-K L M . . . . . . . 
-J I N . . . . . . . 
-G H O . . . . . . . 
-F S P . . . . . . . 
-E R Q . . . . . . . 
-D . . . . . . . . . 
-C . . . . . . . . . 
-B . . . . . . . . . 
-A . . . . . . . . . 
 . . . . . . . . . . 
-
-The letter S got trapped!
-$ ./a.out
-
-. X Y Z . . . . . . 
-. W V . . . . . . . 
-. T U . A . . . . . 
-. S . . B . . . . . 
-Q R . . C . . . . . 
-P O . . D . . . . . 
-M N . . E . . . . . 
-L K . G F . . . . . 
-. J I H . . . . . . 
 . . . . . . . . . . 
 
 Completed 'A' through 'Z'
+$ 
+$ ./a.out
+North: A North to B
+ East: B East to C
+ East: C East to D
+South: D South to E
+South: E South to F
+ West: F West to G
+North: G North to H
+
+. . . . . . . . . . 
+. . . . B C D . . . 
+. . . . A H E . . . 
+. . . . . G F . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+
+The letter H got trapped!
 $ 
 
 */
