@@ -6,8 +6,8 @@
   Write a program that generates a "random walk" across a 10x10 array.
   The array will contain characters (all '.' initially). The program
   must randomly "walk" from element to element, always going up, down,
-  left, or right by one element. The elements visisted by the program
-  will be labeled with the letters A through Z, in the order visisted.
+  left, or right by one element. The elements visited by the program
+  will be labeled with the letters A through Z, in the order visited.
   Here's an example of the desired output:
 
     A . . . . . . . . .
@@ -129,6 +129,7 @@ int main(void)
             }
 
             break;
+
          case 1: // South is the direction
             if ((row + 1 <= 9) && (matrix[row + 1][col] == '.')) {
                matrix[++row][col] = i; // South is open
@@ -163,6 +164,7 @@ int main(void)
             }
  
             break;
+
          case 2: // East is the direction
             if ((col + 1 <= 9) && (matrix[row][col + 1] == '.')) {
                matrix[row][++col] = i; // East is open
@@ -197,6 +199,7 @@ int main(void)
             }
  
             break;
+
          case 3: // West is the direction
             if ((col - 1 >= 0) && (matrix[row][col - 1] == '.')) {
                matrix[row][--col] = i; // West is open
@@ -231,6 +234,7 @@ int main(void)
             }
  
             break;
+
       } // end switch
 
       if (timesBlocked == 4) {  // letter is blocked on all four sides
