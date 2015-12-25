@@ -39,12 +39,12 @@ int main(void)
    return 0;
 }
 
-int sum_two_dimensional_array(int a[][LENGTH], int n)       // function definition
+int sum_two_dimensional_array(int a[][WIDTH], int n)       // function definition
 {
    int i,j, sum = 0;
 
    for (i = 0; i < n; i++) {
-      for (j = 0; j < LENGTH; j++) {
+      for (j = 0; j < WIDTH; j++) {
          a[i][j] += 1;
          sum += a[i][j];
          printf("%3d ", a[i][j]);
