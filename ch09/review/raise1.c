@@ -1,11 +1,11 @@
 /* raise1.c
 
-   Raises a number x to a power on
+   Raises a number x to a power of n.
 
    My expanded version of the book's code snippet example showing
    how function arguments are passed by value.
 
-   C Progrmming: A Modern Approach, Second Edition
+   C Programming: A Modern Approach, Second Edition
    Chapter 9, Page 193
 
    Ray Santos
