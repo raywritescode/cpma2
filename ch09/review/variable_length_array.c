@@ -1,7 +1,7 @@
 /* variable_length_array.c
  
    My expanded version of the book's example illustrating 
-   using a variable-length array .
+   using a variable-length array.
  
    C Programming: A Modern Approach, Second Edition
    Chapter 9, Page 198
